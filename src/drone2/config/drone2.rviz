@@ -1,0 +1,144 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Value: true
+      Cell Size: 1
+      Color: 160; 160; 164
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 20
+      Reference Frame: <Fixed Frame>
+
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Value: true
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+      Marker Scale: 0.3
+      Update Interval: 0
+
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Value: true
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+      Alpha: 1
+
+    - Class: rviz_default_plugins/Odometry
+      Name: Odometry
+      Enabled: true
+      Value: true
+      Topic:
+        Value: /drone2/odom
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+      Position Tolerance: 0.1
+      Angle Tolerance: 0.1
+      Keep: 100
+      Shape:
+        Value: Arrow
+        Alpha: 1
+        Axes Length: 0.3
+        Axes Radius: 0.03
+        Color: 255; 85; 0
+        Head Length: 0.07
+        Head Radius: 0.03
+        Shaft Length: 0.15
+        Shaft Radius: 0.015
+      Covariance:
+        Value: false
+
+    - Class: rviz_default_plugins/Path
+      Name: Drone Path
+      Enabled: true
+      Value: true
+      Topic:
+        Value: /drone2/path
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+      Color: 0; 255; 0
+      Alpha: 1
+      Buffer Length: 1
+      Line Style:
+        Value: Lines
+        Line Width: 0.02
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Style: None
+
+    - Class: rviz_default_plugins/Axes
+      Name: World Origin
+      Enabled: true
+      Value: true
+      Length: 1
+      Radius: 0.02
+      Reference Frame: map
+
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Name: Current View
+      Distance: 5
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 1
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.5
+      Target Frame: base_link
+      Value: Orbit (rviz)
+      Yaw: 3.14
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 846
+  Width: 1280
+  X: 0
+  Y: 0

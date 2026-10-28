@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: drone2
+Version: 0.0.1
+Summary: Quadcopter simulation with ArduPilot SITL, Gazebo, and RViz2
+Home-page: UNKNOWN
+Maintainer: onlydrones
+Maintainer-email: bobbyvinod100@gmail.com
+License: MIT
+Platform: UNKNOWN
+Provides-Extra: test
+
+UNKNOWN
+

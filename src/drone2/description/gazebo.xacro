@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ==================== Gazebo Link Colors & Properties ==================== -->
+  <gazebo reference="body_link">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <gazebo reference="front_marker">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="arm_0">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="arm_1">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="arm_2">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="arm_3">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="prop_0">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="prop_1">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="prop_2">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="prop_3">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="leg_fl">
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="leg_fr">
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="leg_rl">
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="leg_rr">
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <!-- ==================== Placeholder for Future Gazebo Plugins / Sensors ==================== -->
+  <!--
+  Later when you add 2D/3D LiDAR or Depth Camera for indoor SLAM:
+  Include sensor macros and libgazebo_ros_ray_sensor / libgazebo_ros_camera plugins here.
+  -->
+
+</robot>

@@ -1,0 +1,1 @@
+/home/onlydrones/nidar2/src/drone2/launch/launch_sim.launch.py

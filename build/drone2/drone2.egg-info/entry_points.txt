@@ -1,0 +1,3 @@
+[console_scripts]
+gazebo_odom_bridge = drone2.gazebo_odom_bridge:main
+

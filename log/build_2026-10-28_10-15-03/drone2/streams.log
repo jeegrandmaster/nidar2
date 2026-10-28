@@ -1,0 +1,23 @@
+[0.758s] Invoking command in '/home/onlydrones/nidar2/build/drone2': PYTHONPATH=/home/onlydrones/nidar2/build/drone2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/onlydrones/nidar2/build/drone2/build --no-deps symlink_data
+[0.950s] running develop
+[1.055s] running egg_info
+[1.055s] creating drone2.egg-info
+[1.055s] writing drone2.egg-info/PKG-INFO
+[1.055s] writing dependency_links to drone2.egg-info/dependency_links.txt
+[1.055s] writing entry points to drone2.egg-info/entry_points.txt
+[1.055s] writing requirements to drone2.egg-info/requires.txt
+[1.055s] writing top-level names to drone2.egg-info/top_level.txt
+[1.055s] writing manifest file 'drone2.egg-info/SOURCES.txt'
+[1.056s] reading manifest file 'drone2.egg-info/SOURCES.txt'
+[1.057s] writing manifest file 'drone2.egg-info/SOURCES.txt'
+[1.057s] running build_ext
+[1.057s] Creating /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2.egg-link (link to .)
+[1.058s] 
+[1.058s] Installed /home/onlydrones/nidar2/build/drone2
+[1.058s] running symlink_data
+[1.058s] creating /home/onlydrones/nidar2/install/drone2/share/ament_index
+[1.058s] creating /home/onlydrones/nidar2/install/drone2/share/ament_index/resource_index
+[1.058s] creating /home/onlydrones/nidar2/install/drone2/share/ament_index/resource_index/packages
+[1.058s] symbolically linking /home/onlydrones/nidar2/build/drone2/resource/drone2 -> /home/onlydrones/nidar2/install/drone2/share/ament_index/resource_index/packages
+[1.058s] symbolically linking /home/onlydrones/nidar2/build/drone2/package.xml -> /home/onlydrones/nidar2/install/drone2/share/drone2
+[1.080s] Invoked command in '/home/onlydrones/nidar2/build/drone2' returned '0': PYTHONPATH=/home/onlydrones/nidar2/build/drone2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/onlydrones/nidar2/build/drone2/build --no-deps symlink_data

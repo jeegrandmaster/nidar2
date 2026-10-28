@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ==================== Properties ==================== -->
+  <!-- All-up weight (AUW): 2.5 kg -->
+  <!-- Propeller diameter: 6 inch (0.1524 m), radius: 0.0762 m -->
+  <!-- Frame: X-configuration quadcopter -->
+  <xacro:property name="body_mass" value="2.2"/>
+  <xacro:property name="rotor_mass" value="0.025"/>
+  <xacro:property name="body_width" value="0.18"/>
+  <xacro:property name="body_length" value="0.18"/>
+  <xacro:property name="body_height" value="0.08"/>
+  <xacro:property name="arm_length" value="0.22"/>
+  <xacro:property name="arm_radius" value="0.008"/>
+  <xacro:property name="prop_radius" value="0.0762"/>
+  <xacro:property name="prop_thickness" value="0.005"/>
+  <xacro:property name="leg_length" value="0.15"/>
+  <xacro:property name="leg_radius" value="0.005"/>
+
+  <!-- ==================== Materials ==================== -->
+  <material name="dark_grey">
+    <color rgba="0.3 0.3 0.3 1.0"/>
+  </material>
+  <material name="red">
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+  <material name="green">
+    <color rgba="0.0 0.8 0.0 1.0"/>
+  </material>
+  <material name="black">
+    <color rgba="0.1 0.1 0.1 1.0"/>
+  </material>
+  <material name="orange">
+    <color rgba="1.0 0.5 0.0 0.6"/>
+  </material>
+
+  <!-- ==================== Base Link ==================== -->
+  <link name="base_link"/>
+
+  <!-- base_footprint: on the ground directly below base_link -->
+  <link name="base_footprint"/>
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <origin xyz="0 0 -0.195" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ==================== Body ==================== -->
+  <link name="body_link">
+    <visual>
+      <geometry>
+        <box size="${body_length} ${body_width} ${body_height}"/>
+      </geometry>
+      <material name="dark_grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${body_length} ${body_width} ${body_height}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="${body_mass}"/>
+      <inertia ixx="0.012" ixy="0" ixz="0" iyy="0.012" iyz="0" izz="0.020"/>
+    </inertial>
+  </link>
+  <joint name="body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="body_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Arrow marker showing front direction -->
+  <link name="front_marker">
+    <visual>
+      <origin xyz="0.06 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.008" length="0.12"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <joint name="front_marker_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="front_marker"/>
+    <origin xyz="0 0 0.045" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ==================== Arm Macro ==================== -->
+  <xacro:macro name="arm" params="id x y angle color">
+    <link name="arm_${id}">
+      <visual>
+        <origin xyz="${arm_length/2} 0 0" rpy="0 1.5708 0"/>
+        <geometry>
+          <cylinder radius="${arm_radius}" length="${arm_length}"/>
+        </geometry>
+        <material name="${color}"/>
+      </visual>
+    </link>
+    <joint name="arm_${id}_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="arm_${id}"/>
+      <origin xyz="0 0 0" rpy="0 0 ${angle}"/>
+    </joint>
+
+    <!-- Motor mount -->
+    <link name="motor_${id}">
+      <visual>
+        <geometry>
+          <cylinder radius="0.015" length="0.025"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+    </link>
+    <joint name="motor_${id}_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="motor_${id}"/>
+      <origin xyz="${x} ${y} 0.02" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Propeller disc -->
+    <link name="prop_${id}">
+      <visual>
+        <geometry>
+          <cylinder radius="${prop_radius}" length="${prop_thickness}"/>
+        </geometry>
+        <material name="orange"/>
+      </visual>
+      <inertial>
+        <mass value="${rotor_mass}"/>
+        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+      </inertial>
+    </link>
+    <joint name="prop_${id}_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="prop_${id}"/>
+      <origin xyz="${x} ${y} 0.035" rpy="0 0 0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- ==================== Landing Leg Macro ==================== -->
+  <xacro:macro name="leg" params="id x y">
+    <link name="leg_${id}">
+      <visual>
+        <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="${leg_radius}" length="${leg_length}"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+    </link>
+    <joint name="leg_${id}_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="leg_${id}"/>
+      <origin xyz="${x} ${y} -0.04" rpy="0 0 0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- ==================== Instantiate Arms (X-config) ==================== -->
+  <!-- Front-Right (motor 0): red arm -->
+  <xacro:arm id="0" x="0.155" y="-0.155" angle="-0.7854" color="red"/>
+  <!-- Rear-Left (motor 1): black arm -->
+  <xacro:arm id="1" x="-0.155" y="0.155" angle="2.3562" color="black"/>
+  <!-- Front-Left (motor 2): red arm -->
+  <xacro:arm id="2" x="0.155" y="0.155" angle="0.7854" color="red"/>
+  <!-- Rear-Right (motor 3): black arm -->
+  <xacro:arm id="3" x="-0.155" y="-0.155" angle="-2.3562" color="black"/>
+
+  <!-- ==================== Landing Legs ==================== -->
+  <xacro:leg id="fl" x="0.12" y="0.12"/>
+  <xacro:leg id="fr" x="0.12" y="-0.12"/>
+  <xacro:leg id="rl" x="-0.12" y="0.12"/>
+  <xacro:leg id="rr" x="-0.12" y="-0.12"/>
+
+  <!-- ==================== IMU Link (sensor frame) ==================== -->
+  <link name="imu_link"/>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ==================== GPS Link ==================== -->
+  <link name="gps_link"/>
+  <joint name="gps_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="gps_link"/>
+    <origin xyz="0 0 0.06" rpy="0 0 0"/>
+  </joint>
+
+</robot>
