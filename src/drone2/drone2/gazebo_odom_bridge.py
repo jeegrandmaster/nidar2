@@ -1,12 +1,11 @@
 """
-Gazebo Model State → Odometry Bridge for drone2.
+Gazebo Model State -> Odometry & TF Bridge for drone2.
 
-Subscribes to /gazebo/model_states (from gazebo_ros), finds the drone model,
-and publishes nav_msgs/Odometry + tf2 transforms so RViz can visualize
-the drone's position and orientation in real-time.
-
-This replaces the need for MAVROS for odometry visualization.
-When MAVROS is installed later, you can switch to /mavros/local_position/odom.
+Subscribes to /gazebo/model_states (published by libgazebo_ros_state.so),
+tracks the 'drone2' model, and publishes:
+  - /drone2/odom (nav_msgs/Odometry)
+  - /drone2/path (nav_msgs/Path)
+  - TF transform: map -> base_link
 """
 
 import rclpy
@@ -23,12 +22,12 @@ from tf2_ros import TransformBroadcaster
 
 
 class GazeboOdomBridge(Node):
-    """Bridge Gazebo model states to ROS 2 odometry."""
+    """Bridge Gazebo model states to ROS 2 odometry and TF."""
 
     def __init__(self):
         super().__init__('gazebo_odom_bridge')
 
-        # Parameters
+        # Declare parameters
         self.declare_parameter('model_name', 'drone2')
         self.declare_parameter('odom_frame', 'map')
         self.declare_parameter('base_frame', 'base_link')
@@ -50,12 +49,9 @@ class GazeboOdomBridge(Node):
         self.path_msg = Path()
         self.path_msg.header.frame_id = self.odom_frame
 
-        # Subscribe to Gazebo model states
-        qos = QoSProfile(
-            depth=10,
-            reliability=QoSReliabilityPolicy.BEST_EFFORT,
-            durability=QoSDurabilityPolicy.VOLATILE,
-        )
+        # Subscribe to /gazebo/model_states
+        # Use a flexible QoS profile compatible with gazebo_ros_state
+        qos = QoSProfile(depth=10)
         self.sub = self.create_subscription(
             ModelStates,
             '/gazebo/model_states',
@@ -64,20 +60,25 @@ class GazeboOdomBridge(Node):
         )
 
         self.get_logger().info(
-            f'Gazebo Odom Bridge started — tracking model "{self.model_name}"'
+            f'Gazebo Odom Bridge initialized — tracking model "{self.model_name}"'
         )
 
     def model_states_cb(self, msg: ModelStates):
-        # Find our model
+        # Locate the model in the states list
+        idx = -1
         try:
             idx = msg.name.index(self.model_name)
         except ValueError:
-            # Try alternate names (the model might be nested)
+            # Fallback search if model name is prefixed or namespaced
             for i, name in enumerate(msg.name):
-                if self.model_name in name or 'iris' in name.lower():
+                if self.model_name.lower() in name.lower() or 'iris' in name.lower():
                     idx = i
                     break
             else:
+                self.get_logger().warn(
+                    f'Model "{self.model_name}" not found in /gazebo/model_states: {msg.name}',
+                    throttle_duration_sec=5.0
+                )
                 return
 
         pose = msg.pose[idx]
@@ -93,7 +94,7 @@ class GazeboOdomBridge(Node):
         odom.twist.twist = twist
         self.odom_pub.publish(odom)
 
-        # Publish TF: map → base_link
+        # Broadcast TF: map -> base_link
         if self.publish_tf:
             t = TransformStamped()
             t.header.stamp = now
@@ -105,19 +106,25 @@ class GazeboOdomBridge(Node):
             t.transform.rotation = pose.orientation
             self.tf_broadcaster.sendTransform(t)
 
-        # Accumulate path
+        # Append to Path
         ps = PoseStamped()
         ps.header.stamp = now
         ps.header.frame_id = self.odom_frame
         ps.pose = pose
         self.path_msg.poses.append(ps)
 
-        # Limit path length to avoid memory bloat
+        # Limit path points to prevent excessive memory usage
         if len(self.path_msg.poses) > 5000:
             self.path_msg.poses = self.path_msg.poses[-2500:]
 
         self.path_msg.header.stamp = now
         self.path_pub.publish(self.path_msg)
+
+        # Informative periodic log
+        self.get_logger().info(
+            f'Tracking [{msg.name[idx]}] pose: x={pose.position.x:.2f}, y={pose.position.y:.2f}, z={pose.position.z:.2f}',
+            throttle_duration_sec=3.0
+        )
 
 
 def main(args=None):

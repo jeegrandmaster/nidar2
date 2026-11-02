@@ -1,0 +1,17 @@
+[0.681s] Invoking command in '/home/onlydrones/nidar2/build/drone2': PYTHONPATH=/home/onlydrones/nidar2/build/drone2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/onlydrones/nidar2/build/drone2/build --no-deps symlink_data
+[0.864s] running develop
+[0.974s] running egg_info
+[0.975s] writing drone2.egg-info/PKG-INFO
+[0.975s] writing dependency_links to drone2.egg-info/dependency_links.txt
+[0.975s] writing entry points to drone2.egg-info/entry_points.txt
+[0.975s] writing requirements to drone2.egg-info/requires.txt
+[0.975s] writing top-level names to drone2.egg-info/top_level.txt
+[0.976s] reading manifest file 'drone2.egg-info/SOURCES.txt'
+[0.976s] writing manifest file 'drone2.egg-info/SOURCES.txt'
+[0.977s] running build_ext
+[0.977s] Creating /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2.egg-link (link to .)
+[0.978s] Installing gazebo_odom_bridge script to /home/onlydrones/nidar2/install/drone2/lib/drone2
+[0.978s] 
+[0.978s] Installed /home/onlydrones/nidar2/build/drone2
+[0.978s] running symlink_data
+[1.000s] Invoked command in '/home/onlydrones/nidar2/build/drone2' returned '0': PYTHONPATH=/home/onlydrones/nidar2/build/drone2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/onlydrones/nidar2/build/drone2/build --no-deps symlink_data

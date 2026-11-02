@@ -24,6 +24,9 @@ setup(
         # Gazebo world files
         (os.path.join('share', package_name, 'worlds'),
             glob(os.path.join('worlds', '*.world'))),
+        # Gazebo models
+        (os.path.join('share', package_name, 'models', 'drone2'),
+            glob(os.path.join('models', 'drone2', '*'))),
         # RViz config
         (os.path.join('share', package_name, 'config'),
             glob(os.path.join('config', '*.rviz'))),

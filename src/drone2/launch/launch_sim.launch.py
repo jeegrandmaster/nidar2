@@ -16,11 +16,11 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     """
     Launch the full drone2 simulation stack:
-      1. Robot State Publisher (Modular URDF: drone2.urdf.xacro -> drone_core.xacro + gazebo.xacro)
-      2. Gazebo Classic with ArduPilot plugin world
+      1. Robot State Publisher (Modular URDF with RPLIDAR A1 2D LiDAR)
+      2. Gazebo Classic with ArduPilot plugin, RPLIDAR A1 sensor, and state publisher
       3. ArduPilot SITL (sim_vehicle.py) in an interactive terminal window
       4. Gazebo -> Odom bridge (publishes /drone2/odom + TF map->base_link + /drone2/path)
-      5. RViz2 with odometry visualisation
+      5. RViz2 with odometry visualisation and /scan LaserScan display
 
     Usage:
       ros2 launch drone2 launch_sim.launch.py
@@ -62,11 +62,12 @@ def generate_launch_description():
     world_file = os.path.join(pkg_share, 'worlds', 'drone2_ardupilot.world')
 
     # Gazebo models path
+    pkg_models = os.path.join(pkg_share, 'models')
     ardupilot_gazebo_models = os.path.expanduser('~/ardupilot_gazebo/models')
     current_model_path = os.environ.get('GAZEBO_MODEL_PATH', '')
-    gazebo_model_path = ardupilot_gazebo_models
+    gazebo_model_path = f"{pkg_models}:{ardupilot_gazebo_models}"
     if current_model_path:
-        gazebo_model_path = ardupilot_gazebo_models + ':' + current_model_path
+        gazebo_model_path = f"{gazebo_model_path}:{current_model_path}"
 
     # Gazebo plugin path
     ardupilot_gazebo_build = os.path.expanduser('~/ardupilot_gazebo/build')
@@ -85,6 +86,7 @@ def generate_launch_description():
             'gazebo', '--verbose',
             '-s', 'libgazebo_ros_init.so',
             '-s', 'libgazebo_ros_factory.so',
+            '-s', 'libgazebo_ros_state.so',
             world_file,
         ],
         output='screen',

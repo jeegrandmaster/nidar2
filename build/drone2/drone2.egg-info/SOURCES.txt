@@ -5,6 +5,7 @@ config/drone2.rviz
 description/drone2.urdf.xacro
 description/drone_core.xacro
 description/gazebo.xacro
+description/lidar.xacro
 drone2/__init__.py
 drone2/gazebo_odom_bridge.py
 drone2.egg-info/PKG-INFO
@@ -16,5 +17,7 @@ drone2.egg-info/top_level.txt
 drone2.egg-info/zip-safe
 launch/launch_sim.launch.py
 launch/rsp.launch.py
+models/drone2/model.config
+models/drone2/model.sdf
 resource/drone2
 worlds/drone2_ardupilot.world

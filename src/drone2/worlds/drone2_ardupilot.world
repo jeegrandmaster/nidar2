@@ -23,6 +23,15 @@
       <real_time_update_rate>-1</real_time_update_rate>
     </physics>
     <gravity>0 0 -9.8</gravity>
+
+    <!-- Plugin to publish /gazebo/model_states and /gazebo/link_states for ROS 2 -->
+    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
+      <ros>
+        <namespace>/gazebo</namespace>
+      </ros>
+      <update_rate>50.0</update_rate>
+    </plugin>
+
     <include>
       <uri>model://sun</uri>
     </include>
@@ -81,12 +90,130 @@
       </link>
     </model>
 
-    <!-- Drone2 model using ArduPilot iris base -->
-    <model name="drone2">
-      <include>
-        <uri>model://iris_with_ardupilot</uri>
-      </include>
+    <!-- ==================== Environmental Obstacles for LiDAR Range Testing ==================== -->
+    <!-- Pillar 1 at ~4.2m (Front-Left) -->
+    <model name="pillar_1">
+      <static>true</static>
+      <pose>3.0 3.0 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.25</radius><length>2.0</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.25</radius><length>2.0</length></cylinder></geometry>
+          <material><script><name>Gazebo/Grey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        </visual>
+      </link>
     </model>
+
+    <!-- Pillar 2 at 5.0m (Front-Right) -->
+    <model name="pillar_2">
+      <static>true</static>
+      <pose>4.0 -3.0 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.25</radius><length>2.0</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.25</radius><length>2.0</length></cylinder></geometry>
+          <material><script><name>Gazebo/Grey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Pillar 3 at 8.0m (Straight Forward) -->
+    <model name="pillar_3">
+      <static>true</static>
+      <pose>8.0 0.0 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.3</radius><length>2.0</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.3</radius><length>2.0</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Pillar 4 at ~6.4m (Rear-Left) -->
+    <model name="pillar_4">
+      <static>true</static>
+      <pose>-5.0 4.0 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><cylinder><radius>0.25</radius><length>2.0</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.25</radius><length>2.0</length></cylinder></geometry>
+          <material><script><name>Gazebo/Grey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Outer Perimeter Walls (at 10m - 11m to test up to max 12m LiDAR range) -->
+    <model name="wall_north">
+      <static>true</static>
+      <pose>11.0 0.0 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.3 22.0 2.0</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.3 22.0 2.0</size></box></geometry>
+          <material><script><name>Gazebo/Wood</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_south">
+      <static>true</static>
+      <pose>-11.0 0.0 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.3 22.0 2.0</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.3 22.0 2.0</size></box></geometry>
+          <material><script><name>Gazebo/Wood</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_east">
+      <static>true</static>
+      <pose>0.0 10.0 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>22.0 0.3 2.0</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>22.0 0.3 2.0</size></box></geometry>
+          <material><script><name>Gazebo/Wood</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_west">
+      <static>true</static>
+      <pose>0.0 -10.0 1.0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>22.0 0.3 2.0</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>22.0 0.3 2.0</size></box></geometry>
+          <material><script><name>Gazebo/Wood</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Drone2 model with ArduPilot SITL and 360 2D RPLIDAR A1 on top (camera removed) -->
+    <include>
+      <uri>model://drone2</uri>
+      <name>drone2</name>
+      <pose>0 0 0.194923 0 0 0</pose>
+    </include>
 
   </world>
 </sdf>

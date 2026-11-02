@@ -7,9 +7,11 @@
   <!-- ==================== Gazebo Configurations ==================== -->
   <xacro:include filename="gazebo.xacro" />
 
-  <!-- ==================== Future Sensors Placeholder ==================== -->
-  <!--
+  <!-- ==================== 360 2D LiDAR (RPLIDAR A1) ==================== -->
   <xacro:include filename="lidar.xacro" />
+
+  <!-- ==================== Future Camera Placeholder ==================== -->
+  <!--
   <xacro:include filename="camera.xacro" />
   -->
 
