@@ -1,0 +1,27 @@
+running develop
+running egg_info
+writing drone2.egg-info/PKG-INFO
+writing dependency_links to drone2.egg-info/dependency_links.txt
+writing entry points to drone2.egg-info/entry_points.txt
+writing requirements to drone2.egg-info/requires.txt
+writing top-level names to drone2.egg-info/top_level.txt
+reading manifest file 'drone2.egg-info/SOURCES.txt'
+writing manifest file 'drone2.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2.egg-link (link to .)
+Installing gazebo_odom_bridge script to /home/onlydrones/nidar2/install/drone2/lib/drone2
+
+Installed /home/onlydrones/nidar2/build/drone2
+running symlink_data
+symbolically linking /home/onlydrones/nidar2/build/drone2/resource/drone2 -> /home/onlydrones/nidar2/install/drone2/share/ament_index/resource_index/packages
+symbolically linking /home/onlydrones/nidar2/build/drone2/package.xml -> /home/onlydrones/nidar2/install/drone2/share/drone2
+symbolically linking /home/onlydrones/nidar2/build/drone2/launch/launch_sim.launch.py -> /home/onlydrones/nidar2/install/drone2/share/drone2/launch
+symbolically linking /home/onlydrones/nidar2/build/drone2/launch/rsp.launch.py -> /home/onlydrones/nidar2/install/drone2/share/drone2/launch
+symbolically linking /home/onlydrones/nidar2/build/drone2/description/drone_core.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+symbolically linking /home/onlydrones/nidar2/build/drone2/description/lidar.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+symbolically linking /home/onlydrones/nidar2/build/drone2/description/drone2.urdf.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+symbolically linking /home/onlydrones/nidar2/build/drone2/description/gazebo.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+symbolically linking /home/onlydrones/nidar2/build/drone2/worlds/drone2_ardupilot.world -> /home/onlydrones/nidar2/install/drone2/share/drone2/worlds
+symbolically linking /home/onlydrones/nidar2/build/drone2/models/drone2/model.sdf -> /home/onlydrones/nidar2/install/drone2/share/drone2/models/drone2
+symbolically linking /home/onlydrones/nidar2/build/drone2/models/drone2/model.config -> /home/onlydrones/nidar2/install/drone2/share/drone2/models/drone2
+symbolically linking /home/onlydrones/nidar2/build/drone2/config/drone2.rviz -> /home/onlydrones/nidar2/install/drone2/share/drone2/config

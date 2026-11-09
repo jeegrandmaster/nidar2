@@ -5,7 +5,7 @@
   <!-- All-up weight (AUW): 2.5 kg -->
   <!-- Propeller diameter: 6 inch (0.1524 m), radius: 0.0762 m -->
   <!-- Frame: X-configuration quadcopter -->
-  <xacro:property name="body_mass" value="2.2"/>
+  <xacro:property name="body_mass" value="1.0"/>
   <xacro:property name="rotor_mass" value="0.025"/>
   <xacro:property name="body_width" value="0.18"/>
   <xacro:property name="body_length" value="0.18"/>

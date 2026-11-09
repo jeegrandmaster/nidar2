@@ -1,0 +1,46 @@
+[0.547s] Invoking command in '/home/onlydrones/nidar2/build/drone2': PYTHONPATH=/home/onlydrones/nidar2/build/drone2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/onlydrones/nidar2/build/drone2/build
+[0.724s] running develop
+[0.833s] Removing /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2.egg-link (link to .)
+[0.854s] Invoked command in '/home/onlydrones/nidar2/build/drone2' returned '0': PYTHONPATH=/home/onlydrones/nidar2/build/drone2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/onlydrones/nidar2/build/drone2/build
+[0.856s] Invoking command in '/home/onlydrones/nidar2/src/drone2': PYTHONPATH=/home/onlydrones/nidar2/build/drone2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/drone2 build --build-base /home/onlydrones/nidar2/build/drone2/build install --record /home/onlydrones/nidar2/build/drone2/install.log --install-scripts $base/lib/drone2 --single-version-externally-managed install_data --force
+[1.027s] running egg_info
+[1.028s] writing ../../build/drone2/drone2.egg-info/PKG-INFO
+[1.028s] writing dependency_links to ../../build/drone2/drone2.egg-info/dependency_links.txt
+[1.028s] writing entry points to ../../build/drone2/drone2.egg-info/entry_points.txt
+[1.028s] writing requirements to ../../build/drone2/drone2.egg-info/requires.txt
+[1.028s] writing top-level names to ../../build/drone2/drone2.egg-info/top_level.txt
+[1.029s] reading manifest file '../../build/drone2/drone2.egg-info/SOURCES.txt'
+[1.030s] writing manifest file '../../build/drone2/drone2.egg-info/SOURCES.txt'
+[1.030s] running build
+[1.030s] running build_py
+[1.030s] creating /home/onlydrones/nidar2/build/drone2/build
+[1.031s] creating /home/onlydrones/nidar2/build/drone2/build/lib
+[1.031s] creating /home/onlydrones/nidar2/build/drone2/build/lib/drone2
+[1.031s] copying drone2/__init__.py -> /home/onlydrones/nidar2/build/drone2/build/lib/drone2
+[1.031s] copying drone2/gazebo_odom_bridge.py -> /home/onlydrones/nidar2/build/drone2/build/lib/drone2
+[1.031s] running install
+[1.031s] running install_lib
+[1.031s] creating /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2
+[1.031s] copying /home/onlydrones/nidar2/build/drone2/build/lib/drone2/__init__.py -> /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2
+[1.032s] copying /home/onlydrones/nidar2/build/drone2/build/lib/drone2/gazebo_odom_bridge.py -> /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2
+[1.032s] byte-compiling /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2/__init__.py to __init__.cpython-310.pyc
+[1.032s] byte-compiling /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2/gazebo_odom_bridge.py to gazebo_odom_bridge.cpython-310.pyc
+[1.033s] running install_data
+[1.033s] copying resource/drone2 -> /home/onlydrones/nidar2/install/drone2/share/ament_index/resource_index/packages
+[1.033s] copying package.xml -> /home/onlydrones/nidar2/install/drone2/share/drone2
+[1.033s] copying launch/launch_sim.launch.py -> /home/onlydrones/nidar2/install/drone2/share/drone2/launch
+[1.033s] copying launch/rsp.launch.py -> /home/onlydrones/nidar2/install/drone2/share/drone2/launch
+[1.033s] copying description/drone_core.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+[1.033s] copying description/lidar.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+[1.033s] copying description/drone2.urdf.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+[1.034s] copying description/gazebo.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+[1.034s] copying worlds/drone2_ardupilot.world -> /home/onlydrones/nidar2/install/drone2/share/drone2/worlds
+[1.034s] copying models/drone2/model.sdf -> /home/onlydrones/nidar2/install/drone2/share/drone2/models/drone2
+[1.034s] copying models/drone2/model.config -> /home/onlydrones/nidar2/install/drone2/share/drone2/models/drone2
+[1.034s] copying config/drone2.rviz -> /home/onlydrones/nidar2/install/drone2/share/drone2/config
+[1.034s] running install_egg_info
+[1.035s] Copying ../../build/drone2/drone2.egg-info to /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2-0.0.1-py3.10.egg-info
+[1.035s] running install_scripts
+[1.049s] Installing gazebo_odom_bridge script to /home/onlydrones/nidar2/install/drone2/lib/drone2
+[1.049s] writing list of installed files to '/home/onlydrones/nidar2/build/drone2/install.log'
+[1.066s] Invoked command in '/home/onlydrones/nidar2/src/drone2' returned '0': PYTHONPATH=/home/onlydrones/nidar2/build/drone2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/drone2 build --build-base /home/onlydrones/nidar2/build/drone2/build install --record /home/onlydrones/nidar2/build/drone2/install.log --install-scripts $base/lib/drone2 --single-version-externally-managed install_data --force

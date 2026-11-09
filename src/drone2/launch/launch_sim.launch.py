@@ -26,10 +26,16 @@ def generate_launch_description():
       ros2 launch drone2 launch_sim.launch.py
 
     In the interactive ArduPilot SITL / MAVProxy console:
+      # Autonomous altitude takeoff:
       mode guided
       arm throttle
-      takeoff 5
+      takeoff 2
       velocity 2 0 0
+
+      # Manual Stabilize takeoff (do not use `takeoff` in this mode):
+      mode stabilize
+      arm throttle
+      rc 3 1700
     """
 
     pkg_share = get_package_share_directory('drone2')

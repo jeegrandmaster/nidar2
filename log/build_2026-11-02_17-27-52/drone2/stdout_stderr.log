@@ -1,0 +1,42 @@
+running develop
+Removing /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2.egg-link (link to .)
+running egg_info
+writing ../../build/drone2/drone2.egg-info/PKG-INFO
+writing dependency_links to ../../build/drone2/drone2.egg-info/dependency_links.txt
+writing entry points to ../../build/drone2/drone2.egg-info/entry_points.txt
+writing requirements to ../../build/drone2/drone2.egg-info/requires.txt
+writing top-level names to ../../build/drone2/drone2.egg-info/top_level.txt
+reading manifest file '../../build/drone2/drone2.egg-info/SOURCES.txt'
+writing manifest file '../../build/drone2/drone2.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/onlydrones/nidar2/build/drone2/build
+creating /home/onlydrones/nidar2/build/drone2/build/lib
+creating /home/onlydrones/nidar2/build/drone2/build/lib/drone2
+copying drone2/__init__.py -> /home/onlydrones/nidar2/build/drone2/build/lib/drone2
+copying drone2/gazebo_odom_bridge.py -> /home/onlydrones/nidar2/build/drone2/build/lib/drone2
+running install
+running install_lib
+creating /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2
+copying /home/onlydrones/nidar2/build/drone2/build/lib/drone2/__init__.py -> /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2
+copying /home/onlydrones/nidar2/build/drone2/build/lib/drone2/gazebo_odom_bridge.py -> /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2
+byte-compiling /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2/gazebo_odom_bridge.py to gazebo_odom_bridge.cpython-310.pyc
+running install_data
+copying resource/drone2 -> /home/onlydrones/nidar2/install/drone2/share/ament_index/resource_index/packages
+copying package.xml -> /home/onlydrones/nidar2/install/drone2/share/drone2
+copying launch/launch_sim.launch.py -> /home/onlydrones/nidar2/install/drone2/share/drone2/launch
+copying launch/rsp.launch.py -> /home/onlydrones/nidar2/install/drone2/share/drone2/launch
+copying description/drone_core.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+copying description/lidar.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+copying description/drone2.urdf.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+copying description/gazebo.xacro -> /home/onlydrones/nidar2/install/drone2/share/drone2/description
+copying worlds/drone2_ardupilot.world -> /home/onlydrones/nidar2/install/drone2/share/drone2/worlds
+copying models/drone2/model.sdf -> /home/onlydrones/nidar2/install/drone2/share/drone2/models/drone2
+copying models/drone2/model.config -> /home/onlydrones/nidar2/install/drone2/share/drone2/models/drone2
+copying config/drone2.rviz -> /home/onlydrones/nidar2/install/drone2/share/drone2/config
+running install_egg_info
+Copying ../../build/drone2/drone2.egg-info to /home/onlydrones/nidar2/install/drone2/lib/python3.10/site-packages/drone2-0.0.1-py3.10.egg-info
+running install_scripts
+Installing gazebo_odom_bridge script to /home/onlydrones/nidar2/install/drone2/lib/drone2
+writing list of installed files to '/home/onlydrones/nidar2/build/drone2/install.log'
