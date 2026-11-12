@@ -208,12 +208,5 @@
       </link>
     </model>
 
-    <!-- Drone2 model with ArduPilot SITL and 360 2D RPLIDAR A1 on top (camera removed) -->
-    <include>
-      <uri>model://drone2</uri>
-      <name>drone2</name>
-      <pose>0 0 0.194923 0 0 0</pose>
-    </include>
-
   </world>
 </sdf>

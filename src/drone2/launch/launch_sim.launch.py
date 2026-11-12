@@ -16,23 +16,17 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     """
     Launch the full drone2 simulation stack:
-      1. Robot State Publisher (Modular URDF with RPLIDAR A1 2D LiDAR)
-      2. Gazebo Classic with ArduPilot plugin, RPLIDAR A1 sensor, and state publisher
+      1. Robot State Publisher and custom Xacro robot description
+      2. Gazebo Classic with the custom robot, IMU, ArduPilot plugin, and state publisher
       3. ArduPilot SITL (sim_vehicle.py) in an interactive terminal window
       4. Gazebo -> Odom bridge (publishes /drone2/odom + TF map->base_link + /drone2/path)
-      5. RViz2 with odometry visualisation and /scan LaserScan display
+      5. RViz2 with odometry visualisation
 
     Usage:
       ros2 launch drone2 launch_sim.launch.py
 
     In the interactive ArduPilot SITL / MAVProxy console:
-      # Autonomous altitude takeoff:
-      mode guided
-      arm throttle
-      takeoff 2
-      velocity 2 0 0
-
-      # Manual Stabilize takeoff (do not use `takeoff` in this mode):
+      # Indoor attitude-only takeoff (no GPS):
       mode stabilize
       arm throttle
       rc 3 1700
@@ -42,6 +36,7 @@ def generate_launch_description():
 
     use_sim_time = LaunchConfiguration('use_sim_time')
     use_xterm = LaunchConfiguration('use_xterm')
+    use_rviz = LaunchConfiguration('use_rviz')
 
     # ── Declare launch arguments ──
     declare_use_sim_time = DeclareLaunchArgument(
@@ -56,6 +51,12 @@ def generate_launch_description():
         description='Launch SITL MAVProxy console in a dedicated xterm window for interactive commands',
     )
 
+    declare_use_rviz = DeclareLaunchArgument(
+        'use_rviz',
+        default_value='true',
+        description='Launch RViz2 visualization if true',
+    )
+
     # ── 1. Robot State Publisher ──
     rsp_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -67,14 +68,6 @@ def generate_launch_description():
     # ── 2. Gazebo Classic ──
     world_file = os.path.join(pkg_share, 'worlds', 'drone2_ardupilot.world')
 
-    # Gazebo models path
-    pkg_models = os.path.join(pkg_share, 'models')
-    ardupilot_gazebo_models = os.path.expanduser('~/ardupilot_gazebo/models')
-    current_model_path = os.environ.get('GAZEBO_MODEL_PATH', '')
-    gazebo_model_path = f"{pkg_models}:{ardupilot_gazebo_models}"
-    if current_model_path:
-        gazebo_model_path = f"{gazebo_model_path}:{current_model_path}"
-
     # Gazebo plugin path
     ardupilot_gazebo_build = os.path.expanduser('~/ardupilot_gazebo/build')
     current_plugin_path = os.environ.get('GAZEBO_PLUGIN_PATH', '')
@@ -83,20 +76,58 @@ def generate_launch_description():
         gazebo_plugin_path = ardupilot_gazebo_build + ':' + current_plugin_path
 
     gazebo_env = {
-        'GAZEBO_MODEL_PATH': gazebo_model_path,
         'GAZEBO_PLUGIN_PATH': gazebo_plugin_path,
     }
+    gui_env = {
+        **gazebo_env,
+        'QT_QPA_PLATFORM': 'xcb',
+        'GDK_BACKEND': 'x11',
+    }
+    gui_env_command = [
+        'env',
+        '-u', 'SNAP',
+        '-u', 'SNAP_LIBRARY_PATH',
+        '-u', 'GTK_PATH',
+        '-u', 'GTK_EXE_PREFIX',
+    ]
 
     gazebo_server = ExecuteProcess(
         cmd=[
-            'gazebo', '--verbose',
+            'gzserver', '--verbose',
             '-s', 'libgazebo_ros_init.so',
             '-s', 'libgazebo_ros_factory.so',
-            '-s', 'libgazebo_ros_state.so',
             world_file,
         ],
         output='screen',
         additional_env=gazebo_env,
+    )
+
+    gazebo_client = TimerAction(
+        period=2.0,
+        actions=[
+            ExecuteProcess(
+                cmd=gui_env_command + ['gzclient'],
+                output='screen',
+                additional_env=gui_env,
+            )
+        ],
+    )
+
+    # Spawn the custom robot_description, not a Gazebo model/SDF.
+    spawn_robot = TimerAction(
+        period=3.0,
+        actions=[
+            Node(
+                package='gazebo_ros',
+                executable='spawn_entity.py',
+                arguments=[
+                    '-topic', 'robot_description',
+                    '-entity', 'drone2',
+                    '-z', '0.25',
+                ],
+                output='screen',
+            )
+        ],
     )
 
     # ── 3. ArduPilot SITL ──
@@ -112,7 +143,7 @@ def generate_launch_description():
 
     # With xterm (default): opens interactive terminal window where you can type commands directly
     ardupilot_sitl_xterm = TimerAction(
-        period=5.0,
+        period=8.0,
         actions=[
             ExecuteProcess(
                 cmd=[
@@ -131,7 +162,7 @@ def generate_launch_description():
 
     # Without xterm: runs directly
     ardupilot_sitl_direct = TimerAction(
-        period=5.0,
+        period=8.0,
         actions=[
             ExecuteProcess(
                 cmd=sitl_base_cmd,
@@ -169,13 +200,16 @@ def generate_launch_description():
     rviz_node = TimerAction(
         period=3.0,
         actions=[
-            Node(
-                package='rviz2',
-                executable='rviz2',
-                name='rviz2',
+            ExecuteProcess(
+                cmd=gui_env_command + [
+                    'rviz2',
+                    '-d', rviz_config,
+                    '--ros-args',
+                    '-r', '__node:=rviz2',
+                ],
                 output='screen',
-                arguments=['-d', rviz_config],
-                parameters=[{'use_sim_time': use_sim_time}],
+                additional_env=gui_env,
+                condition=IfCondition(use_rviz),
             )
         ],
     )
@@ -183,8 +217,11 @@ def generate_launch_description():
     return LaunchDescription([
         declare_use_sim_time,
         declare_use_xterm,
+        declare_use_rviz,
         rsp_launch,
         gazebo_server,
+        gazebo_client,
+        spawn_robot,
         ardupilot_sitl_xterm,
         ardupilot_sitl_direct,
         odom_bridge_node,

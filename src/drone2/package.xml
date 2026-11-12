@@ -3,7 +3,7 @@
 <package format="3">
   <name>drone2</name>
   <version>0.0.1</version>
-  <description>Quadcopter simulation package (2.5kg AUW, 6-inch props) with ArduPilot SITL, Gazebo Classic, and RViz2 odometry visualization</description>
+  <description>Custom quadcopter URDF simulation with ArduPilot SITL, Gazebo Classic, and an IMU</description>
   <maintainer email="bobbyvinod100@gmail.com">onlydrones</maintainer>
   <license>MIT</license>
 

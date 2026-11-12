@@ -1,18 +1,10 @@
 package.xml
 setup.cfg
 setup.py
-../../build/drone2/drone2.egg-info/PKG-INFO
-../../build/drone2/drone2.egg-info/SOURCES.txt
-../../build/drone2/drone2.egg-info/dependency_links.txt
-../../build/drone2/drone2.egg-info/entry_points.txt
-../../build/drone2/drone2.egg-info/requires.txt
-../../build/drone2/drone2.egg-info/top_level.txt
-../../build/drone2/drone2.egg-info/zip-safe
 config/drone2.rviz
 description/drone2.urdf.xacro
 description/drone_core.xacro
 description/gazebo.xacro
-description/lidar.xacro
 drone2/__init__.py
 drone2/gazebo_odom_bridge.py
 drone2.egg-info/PKG-INFO
@@ -24,7 +16,5 @@ drone2.egg-info/top_level.txt
 drone2.egg-info/zip-safe
 launch/launch_sim.launch.py
 launch/rsp.launch.py
-models/drone2/model.config
-models/drone2/model.sdf
 resource/drone2
 worlds/drone2_ardupilot.world

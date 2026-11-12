@@ -24,9 +24,6 @@ setup(
         # Gazebo world files
         (os.path.join('share', package_name, 'worlds'),
             glob(os.path.join('worlds', '*.world'))),
-        # Gazebo models
-        (os.path.join('share', package_name, 'models', 'drone2'),
-            glob(os.path.join('models', 'drone2', '*'))),
         # RViz config
         (os.path.join('share', package_name, 'config'),
             glob(os.path.join('config', '*.rviz'))),
@@ -35,7 +32,7 @@ setup(
     zip_safe=True,
     maintainer='onlydrones',
     maintainer_email='bobbyvinod100@gmail.com',
-    description='Quadcopter simulation with ArduPilot SITL, Gazebo, and RViz2',
+    description='Custom quadcopter URDF simulation with ArduPilot SITL, Gazebo, and an IMU',
     license='MIT',
     extras_require={
         'test': [
